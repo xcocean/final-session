@@ -1,0 +1,83 @@
+package top.lingkang.config;
+
+import top.lingkang.base.FinalRepository;
+import top.lingkang.base.IdGenerate;
+import top.lingkang.base.impl.FinalIdGenerate;
+import top.lingkang.base.impl.FinalMemoryRepository;
+
+/**
+ * @author lingkang
+ * Created by 2022/1/26
+ */
+public class FinalSessionProperties {
+    // cookie 名称
+    private String cookieName = "fs";
+    // cookie的age，若为true则写入失效时间
+    private boolean cookieAge;
+    // cookie存在最大时间 1小时
+    private long maxValidTime = 3600000L;
+    // 生成id
+    private IdGenerate idGenerate = new FinalIdGenerate();
+    // 每次访问是否更新最后访问时间，即续时功能。
+    private boolean accessUpdateTime;
+    // 保留时间，即每次执行访问操作后台，预留5分钟，防止会话失效的极限时间，在accessUpdateTime==false时启用
+    private long reserveTime=300000L;
+
+    private FinalRepository repository;
+
+    public String getCookieName() {
+        return cookieName;
+    }
+
+    public void setCookieName(String cookieName) {
+        this.cookieName = cookieName;
+    }
+
+    public long getMaxValidTime() {
+        return maxValidTime;
+    }
+
+    public void setMaxValidTime(long maxValidTime) {
+        this.maxValidTime = maxValidTime;
+    }
+
+    public IdGenerate getIdGenerate() {
+        return idGenerate;
+    }
+
+    public void setIdGenerate(IdGenerate idGenerate) {
+        this.idGenerate = idGenerate;
+    }
+
+    public boolean isAccessUpdateTime() {
+        return accessUpdateTime;
+    }
+
+    public void setAccessUpdateTime(boolean accessUpdateTime) {
+        this.accessUpdateTime = accessUpdateTime;
+    }
+
+    public long getReserveTime() {
+        return reserveTime;
+    }
+
+    public void setReserveTime(long reserveTime) {
+        this.reserveTime = reserveTime;
+    }
+
+    public boolean isCookieAge() {
+        return cookieAge;
+    }
+
+    public void setCookieAge(boolean cookieAge) {
+        this.cookieAge = cookieAge;
+    }
+
+    public FinalRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(FinalRepository repository) {
+        this.repository = repository;
+    }
+}
