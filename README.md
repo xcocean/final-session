@@ -1,11 +1,10 @@
 # final-session
 
-## 介绍
-
-final-session 一个轻量级分布式session框架
-
+**final-session** 一个轻量级分布式session框架，它可以无限水平扩充你的集群。
+![core](https://gitee.com/lingkang_top/final-session/raw/master/document/core.png)
+<br>
+<br>
 支持redis、数据库存储会话session，推荐使用redis存储方案。通过自定义生成不同集群ID，读写访问不同的redis集群，从而实现节点无限扩展，架构图如下：
-
 
 ![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84.png)
 
@@ -133,12 +132,12 @@ CREATE TABLE `fs_session`
         properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
     }
 ```
-若默认方案不满意，可自行扩展`FinalRepository`接口进行自定义。
+若默认方案不满意，可自行扩展`FinalRepository`接口进行自定义。final-session准备了许多可扩展接口，你可以尽情发挥你的idea。
 
 ### 其他
 有问题issues，也可以邮箱：**ling-kang@qq.com**
-<br>觉得不错也能打赏我：
+<br><br>也能打赏我：
 <br>
-
-
+![pay](https://gitee.com/lingkang_top/final-session/raw/master/document/pay.png)
+<br><br>
 
