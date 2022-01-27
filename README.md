@@ -1,6 +1,11 @@
 # final-session
 
 **final-session** 一个轻量级分布式session框架，它可以无限水平扩充你的集群。
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+轻巧、易于配置、低入侵是 `final-session` 的设计理念，轻盈而美。如果眼下还是一团零星之火，那运筹帷幄之后，迎面东风，就是一场烈焰燎原吧，那必定会是一番尽情的燃烧。待，秋风萧瑟时，散作满天星辰，你看那四季轮回 ，正是 final-session 不灭的执念。
+
+
 ![core](https://gitee.com/lingkang_top/final-session/raw/master/document/core.png)
 <br>
 <br>
