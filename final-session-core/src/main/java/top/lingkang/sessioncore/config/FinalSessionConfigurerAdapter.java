@@ -1,12 +1,12 @@
-package top.lingkang.config;
+package top.lingkang.sessioncore.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.lingkang.base.FinalRepository;
-import top.lingkang.base.impl.FinalMemoryRepository;
-import top.lingkang.utils.CookieUtils;
-import top.lingkang.wrapper.FinalServletRequestWrapper;
-import top.lingkang.wrapper.FinalSession;
+import top.lingkang.sessioncore.base.FinalRepository;
+import top.lingkang.sessioncore.base.impl.FinalMemoryRepository;
+import top.lingkang.sessioncore.utils.CookieUtils;
+import top.lingkang.sessioncore.wrapper.FinalServletRequestWrapper;
+import top.lingkang.sessioncore.wrapper.FinalSession;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -36,21 +36,21 @@ public class FinalSessionConfigurerAdapter implements Filter {
             session = repository.getSession(sessionId);
         }
         if (session == null) { // 生成会话
-            session = new FinalSession(servletRequest.getServletContext(), properties.getIdGenerate().generateId());
+            session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
             isCookie = true;
         } else {
             // 判断预留时间
             if (!properties.isAccessUpdateTime()) {
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() - properties.getReserveTime() < current) {
-                    // 说明之前的会话已经到期
-                    session = new FinalSession(servletRequest.getServletContext(), properties.getIdGenerate().generateId());
+                    // 说明之前的会话已经到期， 生成会话
+                    session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
                     isCookie = true;
                 }
             } else {
                 // 判断令牌是否有效
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() < current) {
-                    // 说明之前的会话已经到期
-                    session = new FinalSession(servletRequest.getServletContext(), properties.getIdGenerate().generateId());
+                    // 说明之前的会话已经到期， 生成会话
+                    session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
                     isCookie = true;
                 } else {// 更新访问时间
                     session.updateAccessTime(current);
@@ -79,10 +79,9 @@ public class FinalSessionConfigurerAdapter implements Filter {
         // 是否更新会话最后访问时间
         if (session.isExistsUpdate() || properties.isAccessUpdateTime()) {
             session.updateAccessTime();
+            session.setExistsUpdate(false);
             repository.setSession(session.getId(), session);
         }
-
-
     }
 
     @Override
@@ -113,5 +112,4 @@ public class FinalSessionConfigurerAdapter implements Filter {
     protected void configurer(FinalSessionProperties properties) {
         this.properties = properties;
     }
-
 }

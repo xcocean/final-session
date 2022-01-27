@@ -1,4 +1,4 @@
-package top.lingkang.wrapper;
+package top.lingkang.sessioncore.wrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

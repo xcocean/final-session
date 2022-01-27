@@ -1,4 +1,4 @@
-package top.lingkang.error;
+package top.lingkang.sessioncore.error;
 
 /**
  * @author lingkang

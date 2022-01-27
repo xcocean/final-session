@@ -1,7 +1,7 @@
-package top.lingkang.base;
+package top.lingkang.sessioncore.base;
 
-import top.lingkang.config.FinalSessionProperties;
-import top.lingkang.wrapper.FinalSession;
+import top.lingkang.sessioncore.config.FinalSessionProperties;
+import top.lingkang.sessioncore.wrapper.FinalSession;
 
 /**
  * @author lingkang

@@ -1,9 +1,10 @@
-package top.lingkang.config;
+package top.lingkang.sessioncore.config;
 
-import top.lingkang.base.FinalRepository;
-import top.lingkang.base.IdGenerate;
-import top.lingkang.base.impl.FinalIdGenerate;
-import top.lingkang.base.impl.FinalMemoryRepository;
+import top.lingkang.sessioncore.base.FinalRepository;
+import top.lingkang.sessioncore.base.IdGenerate;
+import top.lingkang.sessioncore.base.impl.FinalIdGenerate;
+import top.lingkang.sessioncore.wrapper.DefaultGenerateSession;
+import top.lingkang.sessioncore.wrapper.FinalGenerateSession;
 
 /**
  * @author lingkang
@@ -24,6 +25,8 @@ public class FinalSessionProperties {
     private long reserveTime=300000L;
 
     private FinalRepository repository;
+
+    private FinalGenerateSession generateSession=new DefaultGenerateSession();
 
     public String getCookieName() {
         return cookieName;
@@ -79,5 +82,13 @@ public class FinalSessionProperties {
 
     public void setRepository(FinalRepository repository) {
         this.repository = repository;
+    }
+
+    public FinalGenerateSession getGenerateSession() {
+        return generateSession;
+    }
+
+    public void setGenerateSession(FinalGenerateSession generateSession) {
+        this.generateSession = generateSession;
     }
 }

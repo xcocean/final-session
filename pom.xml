@@ -9,6 +9,22 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
+    <name>final session</name>
+    <description>final-session 一个轻量级分布式session框架</description>
+    <url>http://lingkang.top</url>
+    <organization>
+        <name>lingkang</name>
+        <url>http://lingkang.top</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>lingkang</name>
+            <email>ling-kang@qq.com</email>
+            <organization>lingkang</organization>
+            <organizationUrl>http://lingkang.top</organizationUrl>
+        </developer>
+    </developers>
+
     <modules>
         <module>final-session-core</module>
         <module>example-servlet</module>
@@ -43,6 +59,21 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jdbc</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!-- mysql -->
+            <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.28</version>
+            </dependency>
+
 
             <!--modules-->
             <dependency>

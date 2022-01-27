@@ -1,7 +1,7 @@
 package top.lingkang.exampleservlet.config;
 
-import top.lingkang.config.FinalSessionConfigurerAdapter;
-import top.lingkang.config.FinalSessionProperties;
+import top.lingkang.sessioncore.config.FinalSessionConfigurerAdapter;
+import top.lingkang.sessioncore.config.FinalSessionProperties;
 
 
 /**

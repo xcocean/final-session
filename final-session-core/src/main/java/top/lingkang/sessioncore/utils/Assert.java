@@ -1,4 +1,4 @@
-package top.lingkang.utils;
+package top.lingkang.sessioncore.utils;
 
 /**
  * @author lingkang

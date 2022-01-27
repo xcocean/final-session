@@ -1,6 +1,6 @@
-package top.lingkang.base.impl;
+package top.lingkang.sessioncore.base.impl;
 
-import top.lingkang.base.IdGenerate;
+import top.lingkang.sessioncore.base.IdGenerate;
 
 import java.util.UUID;
 

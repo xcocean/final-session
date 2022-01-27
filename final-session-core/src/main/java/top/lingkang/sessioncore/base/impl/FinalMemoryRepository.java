@@ -1,8 +1,8 @@
-package top.lingkang.base.impl;
+package top.lingkang.sessioncore.base.impl;
 
-import top.lingkang.base.FinalRepository;
-import top.lingkang.config.FinalSessionProperties;
-import top.lingkang.wrapper.FinalSession;
+import top.lingkang.sessioncore.base.FinalRepository;
+import top.lingkang.sessioncore.config.FinalSessionProperties;
+import top.lingkang.sessioncore.wrapper.FinalSession;
 
 import java.util.Map;
 import java.util.Timer;

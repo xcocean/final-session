@@ -1,4 +1,4 @@
-package top.lingkang.utils;
+package top.lingkang.sessioncore.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;

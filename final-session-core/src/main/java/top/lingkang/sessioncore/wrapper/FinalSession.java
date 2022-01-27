@@ -1,6 +1,6 @@
-package top.lingkang.wrapper;
+package top.lingkang.sessioncore.wrapper;
 
-import top.lingkang.utils.Assert;
+import top.lingkang.sessioncore.utils.Assert;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -148,9 +148,27 @@ public class FinalSession implements HttpSession, Serializable {
 
     public void updateAccessTime() {
         lastAccessedTime = System.currentTimeMillis();
+        existsUpdate = true;
     }
 
     public void updateAccessTime(long lastAccessedTime) {
         this.lastAccessedTime = lastAccessedTime;
+        existsUpdate = true;
+    }
+
+
+
+    /* get and set 用于继承扩展 */
+
+    protected void setId(String id) {
+        this.id = id;
+    }
+
+    protected void setLastAccessedTime(long lastAccessedTime) {
+        this.lastAccessedTime = lastAccessedTime;
+    }
+
+    protected Map<String, Object> getAttributes() {
+        return attributes;
     }
 }
