@@ -109,7 +109,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
 ```
 
 #### 存储于数据库
-目前支持mysql(`表名必须fs_session`)，后续可能支持更多数据库
+目前支持了mysql(`表名必须fs_session`)，你可以自行扩展接口，支持其他数据库。
 ```sql
 CREATE TABLE `fs_session`
 (
