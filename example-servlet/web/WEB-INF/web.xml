@@ -11,6 +11,6 @@
     </filter-mapping>
     <filter>
         <filter-name>sessionFilter</filter-name>
-        <filter-class>top.lingkang.exampleservlet.config.MyConfigurerAdapter</filter-class>
+        <filter-class>top.lingkang.exampleservlet.config.MyFinalSessionConfig</filter-class>
     </filter>
 </web-app>

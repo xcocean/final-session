@@ -5,9 +5,13 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import top.lingkang.sessioncore.base.IdGenerate;
 import top.lingkang.sessioncore.base.impl.FinalDataBaseRepository;
+import top.lingkang.sessioncore.base.impl.FinalRedisRepository;
 import top.lingkang.sessioncore.config.FinalSessionConfigurerAdapter;
 import top.lingkang.sessioncore.config.FinalSessionProperties;
+
+import java.util.UUID;
 
 /**
  * @author lingkang
@@ -23,7 +27,22 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
 
     @Override
     protected void configurer(FinalSessionProperties properties) {
-        //properties.setRepository(new FinalRedisRepository(redisTemplate));
-        properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
+        // 自定义会话时长
+        properties.setMaxValidTime(19951219L);
+        // 自定义cookie名称
+        properties.setCookieName("lingkang");
+        // 配置id生成规则
+        properties.setIdGenerate(new IdGenerate() {
+            @Override
+            public String generateId() {
+                // 自定义id的值，可以根据不同id前缀访问不同redis集群，从而实现集群无限扩展
+                return UUID.randomUUID().toString();
+            }
+        });
+
+        // 更多配置 ...
+
+        // 默认会话存储于内存中，下面将会话存储于mysql中，需要引入JdbcTemplate依赖
+        //properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
     }
 }
