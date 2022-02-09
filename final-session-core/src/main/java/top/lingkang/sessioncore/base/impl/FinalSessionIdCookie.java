@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author lingkang
- * @date 2022/2/9
+ * Created by 2022/2/9
  */
 public class FinalSessionIdCookie implements FinalSessionId {
     @Override
