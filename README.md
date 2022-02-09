@@ -35,7 +35,7 @@ mvn clean package
 继承`FinalSessionConfigurerAdapter`类进行配置。<br>
 在spring中配置：`(必须在所有拦截器的前面)`
 ```java
-@Order(Integer.MIN_VALUE - 1995)
+@Order(-19951219)
 @Component
 public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     @Override
@@ -109,7 +109,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
 ```
 
 #### 存储于数据库
-目前支持了mysql(`表名必须fs_session`)，你可以自行扩展接口，支持其他数据库。
+目前支持了mysql(`表名必须fs_session`)，你可以自行扩展`FinalRepository`接口，以支持其他数据库。
 ```sql
 CREATE TABLE `fs_session`
 (

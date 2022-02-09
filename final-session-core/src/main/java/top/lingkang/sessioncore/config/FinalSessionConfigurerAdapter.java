@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.lingkang.sessioncore.base.FinalRepository;
 import top.lingkang.sessioncore.base.impl.FinalMemoryRepository;
-import top.lingkang.sessioncore.utils.CookieUtils;
+import top.lingkang.sessioncore.error.FinalValidException;
 import top.lingkang.sessioncore.wrapper.FinalServletRequestWrapper;
 import top.lingkang.sessioncore.wrapper.FinalSession;
 
@@ -28,45 +28,39 @@ public class FinalSessionConfigurerAdapter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         FinalSession session = null;
         long current = System.currentTimeMillis();
-        boolean isCookie = false;
+        boolean isSetId = false;
 
-        // 获取cookie
-        String sessionId = CookieUtils.getCookieValue(properties.getCookieName(), request.getCookies());
+        // 获取sessionId
+        String sessionId = properties.getSessionId().getSessionId(request, properties);
+
         if (sessionId != null) {
             session = repository.getSession(sessionId);
         }
         if (session == null) { // 生成会话
             session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-            isCookie = true;
+            isSetId = true;
         } else {
             // 判断预留时间
             if (!properties.isAccessUpdateTime()) {
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() - properties.getReserveTime() < current) {
                     // 说明之前的会话已经到期， 生成会话
                     session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-                    isCookie = true;
+                    isSetId = true;
                 }
             } else {
                 // 判断令牌是否有效
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() < current) {
                     // 说明之前的会话已经到期， 生成会话
                     session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-                    isCookie = true;
+                    isSetId = true;
                 } else {// 更新访问时间
                     session.updateAccessTime(current);
                 }
             }
         }
 
-        if (isCookie) {
-            CookieUtils.addSessionIdToCookie(
-                    properties.getCookieName(),
-                    session.getId(),
-                    properties.isCookieAge(),
-                    properties.getMaxValidTime(),
-                    (HttpServletResponse) servletResponse
-            );
-
+        if (isSetId) {
+            properties.getSessionId().setSessionId((HttpServletResponse) servletResponse, properties, session.getId());
             session.setExistsUpdate(true);
         }
 
@@ -91,7 +85,7 @@ public class FinalSessionConfigurerAdapter implements Filter {
         if (!properties.isAccessUpdateTime()) {
             if (properties.getMaxValidTime() < properties.getReserveTime()) {
                 log.error("最大令牌时效时间不能比预留时间小， maxValidTime < reserveTime error !",
-                        new RuntimeException("最大令牌时效时间不能比预留时间小， maxValidTime < reserveTime error !"));
+                        new FinalValidException("最大令牌时效时间不能比预留时间小， maxValidTime < reserveTime error !"));
                 System.exit(0);
             }
         }

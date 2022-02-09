@@ -7,5 +7,4 @@ package top.lingkang.sessioncore.constants;
 public enum SessionUpdateType {
     UPDATE,
     NEW,
-
 }
