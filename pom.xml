@@ -11,7 +11,6 @@
 
     <name>final session</name>
     <description>final-session 一个轻量级分布式session框架</description>
-    <url>https://github.com/xcocean/final-session</url>
     <organization>
         <name>lingkang</name>
         <url>http://lingkang.top</url>
@@ -31,11 +30,6 @@
             <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
-    <scm>
-        <connection>scm:git:git://github.com/xcocean/final-session.git</connection>
-        <developerConnection>scm:git:ssh://github.com:xcocean/final-session.git</developerConnection>
-        <url>http://github.com/xcocean/final-session/tree/master</url>
-    </scm>
 
     <modules>
         <module>final-session-core</module>
