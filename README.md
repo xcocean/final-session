@@ -18,7 +18,7 @@ demo展示
 
 ## 快速入门
 ### 方式一：
-直接从gitee下载最新jar包：https://gitee.com/lingkang_top/redis-window/releases
+直接从gitee下载最新jar包：https://gitee.com/lingkang_top/final-session/releases
 <br/>
 ### 方式二：
 拉取代码，使用maven打包
