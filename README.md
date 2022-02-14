@@ -1,9 +1,9 @@
 # final-session
 
-**final-session** 一个轻量级分布式session框架，它可以无限水平扩展你的集群。
+**final-session** 一个轻量级分布式session框架，它可以无限水平扩展你的集群，使集群会话变得简单。
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-轻巧、易于配置、低入侵是 `final-session` 的设计理念，轻盈而美。如果眼下还是一团零星之火，那运筹帷幄之后，迎面东风，就是一场烈焰燎原吧，那必定会是一番尽情的燃烧。待，秋风萧瑟时，散作满天星辰，你看那四季轮回 ，正是 final-session 不灭的执念。
+轻巧、易于配置、低入侵是 `final-session` 的设计理念，轻盈而美。
 
 
 ![core](https://gitee.com/lingkang_top/final-session/raw/master/document/core.png)
@@ -12,6 +12,9 @@
 支持redis、数据库存储会话session，推荐使用redis存储方案。通过自定义生成不同集群ID，读写访问不同的redis集群，从而实现节点无限扩展，架构图如下：
 
 ![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84.png)
+
+demo展示
+![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/demo1.jpg)
 
 ## 快速入门
 拉取代码，使用maven打包
@@ -76,7 +79,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
         // 配置id生成规则
         properties.setIdGenerate(new IdGenerate() {
             @Override
-            public String generateId() {
+            public String generateId(HttpServletRequest request) {
             // 自定义id的值，可以根据不同id前缀访问不同redis集群，从而实现集群无限扩展
             return UUID.randomUUID().toString();
             }

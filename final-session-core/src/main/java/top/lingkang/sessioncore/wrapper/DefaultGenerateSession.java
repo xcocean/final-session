@@ -11,6 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 public class DefaultGenerateSession implements FinalGenerateSession {
     @Override
     public FinalSession generateSession(HttpServletRequest request, IdGenerate idGenerate) {
-        return new FinalSession(request.getServletContext(), idGenerate.generateId());
+        return new FinalSession(request.getServletContext(), idGenerate.generateId(request));
     }
 }
