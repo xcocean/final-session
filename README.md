@@ -17,6 +17,10 @@ demo展示
 ![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/demo1.jpg)
 
 ## 快速入门
+### 方式一：
+直接从gitee下载最新jar包：https://gitee.com/lingkang_top/redis-window/releases
+<br/>
+### 方式二：
 拉取代码，使用maven打包
 ```shell
 mvn clean package
