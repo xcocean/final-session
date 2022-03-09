@@ -33,36 +33,43 @@ public class FinalSessionConfigurerAdapter implements Filter {
         // 获取sessionId
         String sessionId = properties.getSessionId().getSessionId(request, properties);
 
-        if (sessionId != null) {
-            session = repository.getSession(sessionId);
-        }
-        if (session == null) { // 生成会话
-            session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-            isSetId = true;
-        } else {
-            // 判断预留时间
-            if (!properties.isAccessUpdateTime()) {
-                if (session.getLastAccessedTime() + properties.getMaxValidTime() - properties.getReserveTime() < current) {
-                    // 说明之前的会话已经到期， 生成会话
-                    session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-                    isSetId = true;
-                }
+        try {
+            if (sessionId != null) {
+                session = repository.getSession(sessionId);
+            }
+            if (session == null) { // 生成会话
+                session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
+                isSetId = true;
             } else {
-                // 判断令牌是否有效
-                if (session.getLastAccessedTime() + properties.getMaxValidTime() < current) {
-                    // 说明之前的会话已经到期， 生成会话
-                    session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
-                    isSetId = true;
-                } else {// 更新访问时间
-                    session.updateAccessTime(current);
+                // 判断预留时间
+                if (!properties.isAccessUpdateTime()) {
+                    if (session.getLastAccessedTime() + properties.getMaxValidTime() - properties.getReserveTime() < current) {
+                        // 说明之前的会话已经到期， 生成会话
+                        session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
+                        isSetId = true;
+                    }
+                } else {
+                    // 判断令牌是否有效
+                    if (session.getLastAccessedTime() + properties.getMaxValidTime() < current) {
+                        // 说明之前的会话已经到期， 生成会话
+                        session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
+                        isSetId = true;
+                    } else {// 更新访问时间
+                        session.updateAccessTime(current);
+                    }
                 }
             }
+
+            if (isSetId) {
+                properties.getSessionId().setSessionId((HttpServletResponse) servletResponse, properties, session.getId());
+                session.setExistsUpdate(true);
+            }
+        }catch (Exception  e){
+            log.error("final-session在处理会话时出现异常，final-session encountered an exception while processing the session");
+            properties.getExceptionHandler().handler(e,request,(HttpServletResponse) servletResponse);
+            return;
         }
 
-        if (isSetId) {
-            properties.getSessionId().setSessionId((HttpServletResponse) servletResponse, properties, session.getId());
-            session.setExistsUpdate(true);
-        }
 
         FinalServletRequestWrapper wrapper = new FinalServletRequestWrapper(request);
         wrapper.setSession(session);

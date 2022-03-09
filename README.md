@@ -114,6 +114,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
         properties.setRepository(new FinalRedisRepository(redisTemplate));
     }
 ```
+`若想在可视化工具看到key，可自行反序列化`
 
 #### 存储于数据库
 目前支持了mysql(`表名必须fs_session`)，你可以自行扩展`FinalRepository`接口，以支持其他数据库。
