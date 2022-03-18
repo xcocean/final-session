@@ -42,6 +42,7 @@ public class FinalDataBaseRepository implements FinalRepository {
                 return null;
             return (FinalSession) SerializationUtils.unSerialization(ins.get(0));
         } catch (Exception e) {
+            log.error("会话获取失败：",e);
             throw new IllegalArgumentException("会话获取失败：", e);
         }
     }
@@ -54,6 +55,7 @@ public class FinalDataBaseRepository implements FinalRepository {
             if (update == 0)
                 jdbcTemplate.update("insert into fs_session(id,session) values(?,?)", id, serialization);
         } catch (IOException e) {
+            log.error("设置会话失败：",e);
             throw new IllegalArgumentException("设置会话失败：", e);
         }
     }
