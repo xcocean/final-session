@@ -22,15 +22,15 @@ public class FinalSessionProperties {
     // 生成id
     private IdGenerate idGenerate = new FinalIdGenerate();
     // 每次访问是否更新最后访问时间，即续时功能。
-    private boolean accessUpdateTime;
+    private boolean isUpdateAccessTime;
     // 保留时间，即每次执行访问操作后台，预留5分钟，防止会话失效的极限时间，在accessUpdateTime==false时启用
-    private long reserveTime=300000L;
+    private long reserveTime = 300000L;
 
     private FinalRepository repository;
 
-    private FinalGenerateSession generateSession=new DefaultGenerateSession();
+    private FinalGenerateSession generateSession = new DefaultGenerateSession();
 
-    private FinalSessionId sessionId=new FinalSessionIdCookie();
+    private FinalSessionId sessionId = new FinalSessionIdCookie();
 
     public FinalSessionId getSessionId() {
         return sessionId;
@@ -64,12 +64,12 @@ public class FinalSessionProperties {
         this.idGenerate = idGenerate;
     }
 
-    public boolean isAccessUpdateTime() {
-        return accessUpdateTime;
+    public boolean isUpdateAccessTime() {
+        return isUpdateAccessTime;
     }
 
-    public void setAccessUpdateTime(boolean accessUpdateTime) {
-        this.accessUpdateTime = accessUpdateTime;
+    public void setUpdateAccessTime(boolean updateAccessTime) {
+        isUpdateAccessTime = updateAccessTime;
     }
 
     public long getReserveTime() {

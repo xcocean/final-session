@@ -17,8 +17,10 @@ public class WebController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        System.out.println(req.getClass().getName());
         System.out.println(session.getClass().getName());
         System.out.println(session.getAttribute("a"));
         session.setAttribute("a",System.currentTimeMillis());
+        resp.getWriter().print("ok："+System.getenv().toString());
     }
 }

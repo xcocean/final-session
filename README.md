@@ -3,13 +3,13 @@
 **final-session** 一个轻量级分布式session框架，它可以无限水平扩展你的集群。
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-轻巧、易于配置、低入侵是 `final-session` 的设计理念，轻盈而美。如果眼下还是一团零星之火，那运筹帷幄之后，迎面东风，就是一场烈焰燎原吧，那必定会是一番尽情的燃烧。待，秋风萧瑟时，散作满天星辰，你看那四季轮回 ，正是 final-session 不灭的执念。
+轻巧、易于配置、低入侵是 `final-session` 的设计理念，她轻盈而美。
 
 
 ![core](https://gitee.com/lingkang_top/final-session/raw/master/document/core.png)
 <br>
 <br>
-支持redis、数据库存储会话session，推荐使用redis存储方案。通过自定义生成不同集群ID，读写访问不同的redis集群，从而实现节点无限扩展，架构图如下：
+> 支持redis、数据库存储会话session，推荐使用redis存储方案。通过自定义生成不同集群ID，读写访问不同的redis集群，从而实现节点无限扩展，架构图如下：
 
 ![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84.png)
 
@@ -19,21 +19,19 @@
 mvn clean package
 ```
 得到项目核心包：`final-session-core/target/final-session-core-1.0.0.jar`<br>
-将`final-session-core-1.0.0.jar`引入项目
-例如Maven中：
+将`final-session-core-1.0.0.jar`引入项目，在Maven中：
 ```xml
 <dependency>
     <groupId>top.lingkang</groupId>
     <artifactId>final-session-core</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <scope>system</scope>
-    <systemPath>${project.basedir}/lib/final-session-core-1.0.0.jar</systemPath>
+    <systemPath>${project.basedir}/lib/final-session-core-2.0.0.jar</systemPath>
 </dependency>
 ```
-## 配置
-### 使用配置
+
+#### 在spring中配置：`(必须在所有拦截器的前面)`
 继承`FinalSessionConfigurerAdapter`类进行配置。<br>
-在spring中配置：`(必须在所有拦截器的前面)`
 ```java
 @Order(-19951219)
 @Component
@@ -44,7 +42,9 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     }
 }
 ```
-在传统 Servlet 3.1+ 配置
+启动项目！
+
+#### 在传统 Servlet 3.1+ 配置
 ```java
 public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     @Override
@@ -64,12 +64,15 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     <filter-class>top.lingkang.exampleservlet.config.MyFinalSessionConfig</filter-class>
 </filter>
 ```
+启动项目！
+
+## 其他配置说明
 ### 会话名称和会话ID
 默认的cookie为fs，会话ID为UUID，可以定制
 ```java
     @Override
     protected void configurer(FinalSessionProperties properties) {
-        // 自定义会话时长
+        // 自定义会话时长 单位：毫秒
         properties.setMaxValidTime(19951219L);
         // 自定义cookie名称
         properties.setCookieName("lingkang");
@@ -108,8 +111,9 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     }
 ```
 
+
 #### 存储于数据库
-目前支持了mysql(`表名必须fs_session`)，你可以自行扩展`FinalRepository`接口，以支持其他数据库。
+目前支持了默认的mysql`表名必须fs_session`，开发中使用数据库不失是一种智慧！
 ```sql
 CREATE TABLE `fs_session`
 (
@@ -120,6 +124,7 @@ CREATE TABLE `fs_session`
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
+`final-session` 底部依赖了spring-boot-jdbc，需要手动添加依赖
 ```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -137,11 +142,11 @@ CREATE TABLE `fs_session`
         properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
     }
 ```
-若默认方案不满意，可自行扩展`FinalRepository`接口进行自定义。final-session准备了许多可扩展接口，你可以尽情发挥你的idea。
+若以上默认的存储方案不满意，可自行扩展`FinalRepository`接口进行自定义。final-session准备了许多可扩展接口，你可以尽情发挥你的创新想法！
 
 ### 其他
 有问题issues，也可以邮箱：**ling-kang@qq.com**
-<br><br>也能打赏我：
+<br><br>也能打赏支持我：
 <br>
 ![pay](https://gitee.com/lingkang_top/final-session/raw/master/document/pay.png)
 <br><br>

@@ -146,14 +146,8 @@ public class FinalSession implements HttpSession, Serializable {
         this.existsUpdate = existsUpdate;
     }
 
-    public void updateAccessTime() {
-        lastAccessedTime = System.currentTimeMillis();
-        existsUpdate = true;
-    }
-
     public void updateAccessTime(long lastAccessedTime) {
         this.lastAccessedTime = lastAccessedTime;
-        existsUpdate = true;
     }
 
 

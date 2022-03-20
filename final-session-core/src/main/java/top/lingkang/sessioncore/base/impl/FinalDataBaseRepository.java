@@ -2,6 +2,7 @@ package top.lingkang.sessioncore.base.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import top.lingkang.sessioncore.base.FinalRepository;
@@ -14,11 +15,15 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author lingkang
  * Created by 2022/1/27
+ * 会话存储在数据库中，默认淘汰机制为 8 小时执行一次，使用该类需要创建表 fs_session
  */
 public class FinalDataBaseRepository implements FinalRepository {
     private static final Logger log = LoggerFactory.getLogger(FinalDataBaseRepository.class);
@@ -27,6 +32,19 @@ public class FinalDataBaseRepository implements FinalRepository {
 
     public FinalDataBaseRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        // 检查是否存在表
+        try {
+            jdbcTemplate.query("select id from fs_session where id='fs'", new RowMapper() {
+                @Override
+                public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return null;
+                }
+            });
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            log.error("数据库不存在`fs_session`，请检查。或执行 src/main/resources/sql/mysql.sql 的SQL");
+            System.exit(0);
+        }
     }
 
     @Override
@@ -42,6 +60,7 @@ public class FinalDataBaseRepository implements FinalRepository {
                 return null;
             return (FinalSession) SerializationUtils.unSerialization(ins.get(0));
         } catch (Exception e) {
+            log.error("会话获取失败：",e);
             throw new IllegalArgumentException("会话获取失败：", e);
         }
     }
@@ -54,6 +73,7 @@ public class FinalDataBaseRepository implements FinalRepository {
             if (update == 0)
                 jdbcTemplate.update("insert into fs_session(id,session) values(?,?)", id, serialization);
         } catch (IOException e) {
+            log.error("设置会话失败：",e);
             throw new IllegalArgumentException("设置会话失败：", e);
         }
     }

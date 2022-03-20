@@ -11,6 +11,7 @@ import top.lingkang.sessioncore.base.impl.FinalRedisRepository;
 import top.lingkang.sessioncore.config.FinalSessionConfigurerAdapter;
 import top.lingkang.sessioncore.config.FinalSessionProperties;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -34,7 +35,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
         // 配置id生成规则
         properties.setIdGenerate(new IdGenerate() {
             @Override
-            public String generateId() {
+            public String generateId(HttpServletRequest request) {
                 // 自定义id的值，可以根据不同id前缀访问不同redis集群，从而实现集群无限扩展
                 return UUID.randomUUID().toString();
             }
@@ -44,5 +45,6 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
 
         // 默认会话存储于内存中，下面将会话存储于mysql中，需要引入JdbcTemplate依赖
         properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
+        //properties.setRepository(new FinalRedisRepository(redisTemplate));
     }
 }

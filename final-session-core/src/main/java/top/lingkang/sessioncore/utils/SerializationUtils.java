@@ -5,6 +5,7 @@ import java.io.*;
 /**
  * @author lingkang
  * Created by 2022/1/27
+ * 序列化反序列化工具
  */
 public class SerializationUtils {
     public static byte[] serialization(Object source) throws IOException {
