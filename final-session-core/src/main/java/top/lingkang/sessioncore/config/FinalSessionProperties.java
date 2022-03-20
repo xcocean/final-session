@@ -1,11 +1,9 @@
 package top.lingkang.sessioncore.config;
 
 import top.lingkang.sessioncore.base.FinalRepository;
-import top.lingkang.sessioncore.base.FinalSessionExceptionHandler;
 import top.lingkang.sessioncore.base.FinalSessionId;
 import top.lingkang.sessioncore.base.IdGenerate;
 import top.lingkang.sessioncore.base.impl.FinalIdGenerate;
-import top.lingkang.sessioncore.base.impl.FinalSessionDefaultExceptionHandler;
 import top.lingkang.sessioncore.base.impl.FinalSessionIdCookie;
 import top.lingkang.sessioncore.wrapper.DefaultGenerateSession;
 import top.lingkang.sessioncore.wrapper.FinalGenerateSession;
@@ -33,17 +31,6 @@ public class FinalSessionProperties {
     private FinalGenerateSession generateSession = new DefaultGenerateSession();
 
     private FinalSessionId sessionId = new FinalSessionIdCookie();
-
-    // 异常处理，可能存在读取redis或者数据库的异常
-    private FinalSessionExceptionHandler exceptionHandler=new FinalSessionDefaultExceptionHandler();
-
-    public FinalSessionExceptionHandler getExceptionHandler() {
-        return exceptionHandler;
-    }
-
-    public void setExceptionHandler(FinalSessionExceptionHandler exceptionHandler) {
-        this.exceptionHandler = exceptionHandler;
-    }
 
     public FinalSessionId getSessionId() {
         return sessionId;

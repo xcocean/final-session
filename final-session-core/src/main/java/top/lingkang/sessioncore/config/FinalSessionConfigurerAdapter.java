@@ -86,7 +86,7 @@ public class FinalSessionConfigurerAdapter implements Filter {
         repository = properties.getRepository();
         if (repository == null) {
             repository = new FinalMemoryRepository();
-            log.warn("final-session use memory repository! final-session 使用内存作为存储，不适用与分布式会话！");
+            log.warn("final-session use memory repository! final-session 使用内存作为存储，不适用于分布式会话！");
         }
         repository.setFinalSessionProperties(properties);
         log.info("final-session init finish...");
