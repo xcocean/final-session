@@ -144,6 +144,22 @@ CREATE TABLE `fs_session`
 ```
 若以上默认的存储方案不满意，可自行扩展`FinalRepository`接口进行自定义。final-session准备了许多可扩展接口，你可以尽情发挥你的创新想法！
 
+## 打包注意事项
+你的项目使用spring-boot插件进行打包时，不会囊括`system`作用域的依赖，需要配置一下你项目的spring-boot插件
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>repackage</id>
+            <goals>
+                <goal>repackage</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
 ### 其他
 有问题issues，也可以邮箱：**ling-kang@qq.com**
 <br><br>也能打赏支持我：
