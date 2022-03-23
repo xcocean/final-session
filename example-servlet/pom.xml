@@ -20,21 +20,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>top.lingkang</groupId>
             <artifactId>final-session-core</artifactId>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jcl -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.33</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jcl</artifactId>
         </dependency>
 
     </dependencies>

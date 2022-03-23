@@ -1,7 +1,7 @@
 package top.lingkang.sessioncore.base.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,7 +26,7 @@ import java.util.TimerTask;
  * 会话存储在数据库中，默认淘汰机制为 8 小时执行一次，使用该类需要创建表 fs_session
  */
 public class FinalDataBaseRepository implements FinalRepository {
-    private static final Logger log = LoggerFactory.getLogger(FinalDataBaseRepository.class);
+    private static final Log log = LogFactory.getLog(FinalDataBaseRepository.class);
     private FinalSessionProperties properties;
     private JdbcTemplate jdbcTemplate;
 
@@ -60,7 +60,7 @@ public class FinalDataBaseRepository implements FinalRepository {
                 return null;
             return (FinalSession) SerializationUtils.unSerialization(ins.get(0));
         } catch (Exception e) {
-            log.error("会话获取失败：",e);
+            log.error("会话获取失败：", e);
             throw new IllegalArgumentException("会话获取失败：", e);
         }
     }
@@ -73,7 +73,7 @@ public class FinalDataBaseRepository implements FinalRepository {
             if (update == 0)
                 jdbcTemplate.update("insert into fs_session(id,session) values(?,?)", id, serialization);
         } catch (IOException e) {
-            log.error("设置会话失败：",e);
+            log.error("设置会话失败：", e);
             throw new IllegalArgumentException("设置会话失败：", e);
         }
     }
@@ -89,7 +89,7 @@ public class FinalDataBaseRepository implements FinalRepository {
             public void run() {
                 Date date = new Date(System.currentTimeMillis() - time);
                 int result = jdbcTemplate.update("delete from fs_session where update_time<?", format.format(date));
-                log.info("清理数据库过期会话数：{} 个", result);
+                log.info("清理数据库过期会话数：" + result + " 个");
             }
         }, 5000, 28800000);// 8小时执行一次
     }
