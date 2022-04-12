@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>2.0.0</version>
 
-    <name>final session</name>
+    <url>https://gitee.com/lingkang_top/final-session</url>
+    <name>final-session</name>
     <description>final-session 一个轻量级分布式session框架</description>
     <organization>
         <name>lingkang</name>
@@ -21,6 +22,10 @@
             <email>ling-kang@qq.com</email>
             <organization>lingkang</organization>
             <organizationUrl>http://lingkang.top</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
         </developer>
     </developers>
 
@@ -28,8 +33,14 @@
         <license>
             <name>MIT License</name>
             <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <scm>
+        <url>https://gitee.com/lingkang_top/final-session</url>
+        <connection>https://gitee.com/lingkang_top/final-session.git</connection>
+    </scm>
 
     <modules>
         <module>final-session-core</module>
@@ -40,7 +51,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <spring.boot.version>2.1.12.RELEASE</spring.boot.version>
+        <spring-boot.version>2.1.12.RELEASE</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -48,28 +59,28 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jdbc</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <!-- mysql -->
@@ -104,6 +115,19 @@
         </dependencies>
     </dependencyManagement>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>maven-public</id> <!-- 此处id与setting.xml中的服务id保持一致 -->
+            <name>oss Snapshots Repository</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>maven-public</id> <!-- 此处id与setting.xml中的服务id保持一致 -->
+            <name>oss Staging Repository</name>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -123,10 +147,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
             </plugin>
             <!-- 生成javadoc -->

@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>final session</name>
+    <url>https://gitee.com/lingkang_top/final-session</url>
+    <name>final-session-core</name>
     <description>final-session 一个轻量级分布式session框架</description>
     <organization>
         <name>lingkang</name>
@@ -27,12 +28,12 @@
         <license>
             <name>MIT License</name>
             <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/xcocean/final-session.git</connection>
-        <developerConnection>scm:git:ssh://github.com:xcocean/final-session.git</developerConnection>
-        <url>http://github.com/xcocean/final-session/tree/master</url>
+        <url>https://gitee.com/lingkang_top/final-session</url>
+        <connection>https://gitee.com/lingkang_top/final-session.git</connection>
     </scm>
 
     <artifactId>final-session-core</artifactId>
