@@ -1,7 +1,7 @@
 package top.lingkang.sessioncore.base.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,7 +26,7 @@ import java.util.TimerTask;
  * 会话存储在数据库中，默认淘汰机制为 8 小时执行一次，使用该类需要创建表 fs_session
  */
 public class FinalDataBaseRepository implements FinalRepository {
-    private static final Log log = LogFactory.getLog(FinalDataBaseRepository.class);
+    private static final Logger log = LoggerFactory.getLogger(FinalDataBaseRepository.class);
     private FinalSessionProperties properties;
     private JdbcTemplate jdbcTemplate;
 

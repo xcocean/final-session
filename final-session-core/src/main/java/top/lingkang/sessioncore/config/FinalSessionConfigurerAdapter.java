@@ -1,8 +1,9 @@
 package top.lingkang.sessioncore.config;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.lingkang.sessioncore.base.FinalRepository;
+import top.lingkang.sessioncore.base.impl.FinalDataBaseRepository;
 import top.lingkang.sessioncore.base.impl.FinalMemoryRepository;
 import top.lingkang.sessioncore.error.FinalValidException;
 import top.lingkang.sessioncore.wrapper.FinalServletRequestWrapper;
@@ -18,7 +19,7 @@ import java.io.IOException;
  * Created by 2022/1/26
  */
 public class FinalSessionConfigurerAdapter implements Filter {
-    private final Log log = LogFactory.getLog(FinalSessionConfigurerAdapter.class);
+    private static final Logger log = LoggerFactory.getLogger(FinalDataBaseRepository.class);
     private FinalSessionProperties properties = new FinalSessionProperties();
     // 会话存储仓库
     private FinalRepository repository;
