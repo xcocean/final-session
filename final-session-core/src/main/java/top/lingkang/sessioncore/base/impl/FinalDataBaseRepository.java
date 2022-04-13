@@ -10,6 +10,7 @@ import top.lingkang.sessioncore.config.FinalSessionProperties;
 import top.lingkang.sessioncore.utils.SerializationUtils;
 import top.lingkang.sessioncore.wrapper.FinalSession;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -76,6 +77,11 @@ public class FinalDataBaseRepository implements FinalRepository {
             log.error("设置会话失败：", e);
             throw new IllegalArgumentException("设置会话失败：", e);
         }
+    }
+
+    @Override
+    public void deleteSession(String id, HttpServletRequest request) {
+        jdbcTemplate.update("delete from fs_session where id=?", id);
     }
 
     @Override

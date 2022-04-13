@@ -12,5 +12,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface FinalSessionId {
     String getSessionId(HttpServletRequest request, FinalSessionProperties properties);
 
-    void setSessionId(HttpServletResponse response, FinalSessionProperties properties, String sessionId);
+    void setSessionId(HttpServletRequest request,HttpServletResponse response, FinalSessionProperties properties, String sessionId);
 }

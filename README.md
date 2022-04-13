@@ -14,23 +14,16 @@
 ![集群架构图](https://gitee.com/lingkang_top/final-session/raw/master/document/%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84.png)
 
 ## 快速入门
-拉取代码，使用maven打包
-```shell
-mvn clean package
-```
-得到项目核心包：`final-session-core/target/final-session-core-1.0.0.jar`<br>
-将`final-session-core-1.0.0.jar`引入项目，在Maven中：
+在Maven中：
 ```xml
 <dependency>
     <groupId>top.lingkang</groupId>
     <artifactId>final-session-core</artifactId>
     <version>2.0.0</version>
-    <scope>system</scope>
-    <systemPath>${project.basedir}/lib/final-session-core-2.0.0.jar</systemPath>
 </dependency>
 ```
 
-#### 在spring中配置：`(必须在所有拦截器的前面)`
+#### 在spring中配置：
 继承`FinalSessionConfigurerAdapter`类进行配置。<br>
 ```java
 @Order(-19951219)
@@ -42,6 +35,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     }
 }
 ```
+`提示：必须在所有过滤器的前`<br>
 启动项目！
 
 #### 在传统 Servlet 3.1+ 配置
@@ -53,7 +47,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     }
 }
 ```
-然后在web.xml中配置：`(必须在所有拦截器的前面)`
+然后在web.xml中配置：`提示：必须在所有过滤器的前`<br>
 ```xml
 <filter-mapping>
     <filter-name>sessionFilter</filter-name>
@@ -79,7 +73,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
         // 配置id生成规则
         properties.setIdGenerate(new IdGenerate() {
             @Override
-            public String generateId() {
+            public String generateId(HttpServletRequest request) {
             // 自定义id的值，可以根据不同id前缀访问不同redis集群，从而实现集群无限扩展
             return UUID.randomUUID().toString();
             }
@@ -118,7 +112,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
 CREATE TABLE `fs_session`
 (
     `id`          varchar(64) NOT NULL,
-    `session`     blob,
+    `session`     longblob,
     `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -144,7 +138,7 @@ CREATE TABLE `fs_session`
 ```
 若以上默认的存储方案不满意，可自行扩展`FinalRepository`接口进行自定义。final-session准备了许多可扩展接口，你可以尽情发挥你的创新想法！
 
-## 打包注意事项
+## ~~打包注意事项~~
 你的项目使用spring-boot插件进行打包时，不会囊括`system`作用域的依赖，需要配置一下你项目的spring-boot插件
 ```xml
 <plugin>
@@ -161,7 +155,7 @@ CREATE TABLE `fs_session`
 </plugin>
 ```
 ### 其他
-有问题issues，也可以邮箱：**ling-kang@qq.com**
+有问题issues、PR，也可以邮箱：**ling-kang@qq.com**
 <br><br>也能打赏支持我：
 <br>
 ![pay](https://gitee.com/lingkang_top/final-session/raw/master/document/pay.png)

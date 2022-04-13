@@ -20,7 +20,7 @@ public class WebController extends HttpServlet {
         System.out.println(req.getClass().getName());
         System.out.println(session.getClass().getName());
         System.out.println(session.getAttribute("a"));
-        session.setAttribute("a",System.currentTimeMillis());
-        resp.getWriter().print("ok："+System.getenv().toString());
+        session.setAttribute("a", System.currentTimeMillis());
+        resp.getWriter().print("ok：" + System.getenv().toString());
     }
 }

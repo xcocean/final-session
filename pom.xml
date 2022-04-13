@@ -7,7 +7,7 @@
     <groupId>top.lingkang</groupId>
     <artifactId>final-session</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 
     <url>https://gitee.com/lingkang_top/final-session</url>
     <name>final-session</name>
@@ -91,26 +91,24 @@
                 <version>8.0.28</version>
             </dependency>
 
-
             <!--modules-->
             <dependency>
                 <groupId>top.lingkang</groupId>
                 <artifactId>final-session-core</artifactId>
-                <version>2.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
             <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-servlet-api</artifactId>
-                <version>9.0.58</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>4.0.1</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-jcl -->
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jcl</artifactId>
-                <version>5.3.15</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.36</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -142,13 +140,11 @@
 
             <!-- 源码发布 -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.1</version>
             </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
-            </plugin>
+
             <!-- 生成javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

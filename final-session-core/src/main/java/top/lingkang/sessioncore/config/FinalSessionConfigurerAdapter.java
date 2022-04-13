@@ -42,12 +42,14 @@ public class FinalSessionConfigurerAdapter implements Filter {
             // 判断预留时间
             if (!properties.isUpdateAccessTime()) {
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() - properties.getReserveTime() < current) {
+                    repository.deleteSession(sessionId, request);
                     // 说明之前的会话已经到期， 重新生成会话
                     session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
                 }
             } else {
                 // 判断令牌是否有效
                 if (session.getLastAccessedTime() + properties.getMaxValidTime() < current) {
+                    repository.deleteSession(sessionId, request);
                     // 说明之前的会话已经到期， 生成会话
                     session = properties.getGenerateSession().generateSession(request, properties.getIdGenerate());
                 } else {// 更新访问时间
@@ -56,11 +58,11 @@ public class FinalSessionConfigurerAdapter implements Filter {
             }
         }
 
+        // 对响应添加 cookie或自定义操作
+        properties.getSessionId().setSessionId(request, (HttpServletResponse) servletResponse, properties, session.getId());
+
         FinalServletRequestWrapper wrapper = new FinalServletRequestWrapper(request);
         wrapper.setSession(session);
-
-        // 对响应添加 cookie或自定义操作
-        properties.getSessionId().setSessionId((HttpServletResponse) servletResponse, properties, session.getId());
 
         // 放行
         filterChain.doFilter(wrapper, servletResponse);

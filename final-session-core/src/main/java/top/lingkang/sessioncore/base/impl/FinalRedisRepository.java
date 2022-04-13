@@ -5,6 +5,7 @@ import top.lingkang.sessioncore.base.FinalRepository;
 import top.lingkang.sessioncore.config.FinalSessionProperties;
 import top.lingkang.sessioncore.wrapper.FinalSession;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,6 +27,11 @@ public class FinalRedisRepository implements FinalRepository {
 
     public void setRedisTemplate(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    @Override
+    public void deleteSession(String id, HttpServletRequest request) {
+        redisTemplate.delete(id);
     }
 
     @Override

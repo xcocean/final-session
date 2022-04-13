@@ -36,71 +36,80 @@ public class FinalSessionProperties {
         return sessionId;
     }
 
-    public void setSessionId(FinalSessionId sessionId) {
+    public FinalSessionProperties setSessionId(FinalSessionId sessionId) {
         this.sessionId = sessionId;
+        return this;
     }
 
     public String getCookieName() {
         return cookieName;
     }
 
-    public void setCookieName(String cookieName) {
+    public FinalSessionProperties setCookieName(String cookieName) {
         this.cookieName = cookieName;
+        return this;
     }
 
     public long getMaxValidTime() {
         return maxValidTime;
     }
 
-    public void setMaxValidTime(long maxValidTime) {
+    public FinalSessionProperties setMaxValidTime(long maxValidTime) {
         this.maxValidTime = maxValidTime;
+        return this;
     }
 
     public IdGenerate getIdGenerate() {
         return idGenerate;
     }
 
-    public void setIdGenerate(IdGenerate idGenerate) {
+    public FinalSessionProperties setIdGenerate(IdGenerate idGenerate) {
         this.idGenerate = idGenerate;
+        return this;
     }
 
     public boolean isUpdateAccessTime() {
         return isUpdateAccessTime;
     }
 
-    public void setUpdateAccessTime(boolean updateAccessTime) {
+    public FinalSessionProperties setUpdateAccessTime(boolean updateAccessTime) {
         isUpdateAccessTime = updateAccessTime;
+        return this;
     }
 
     public long getReserveTime() {
         return reserveTime;
     }
 
-    public void setReserveTime(long reserveTime) {
+    public FinalSessionProperties setReserveTime(long reserveTime) {
         this.reserveTime = reserveTime;
+        return this;
     }
 
     public boolean isCookieAge() {
         return cookieAge;
     }
 
-    public void setCookieAge(boolean cookieAge) {
+    public FinalSessionProperties setCookieAge(boolean cookieAge) {
         this.cookieAge = cookieAge;
+        return this;
     }
 
     public FinalRepository getRepository() {
         return repository;
     }
 
-    public void setRepository(FinalRepository repository) {
+    public FinalSessionProperties setRepository(FinalRepository repository) {
         this.repository = repository;
+        return this;
     }
 
     public FinalGenerateSession getGenerateSession() {
         return generateSession;
     }
 
-    public void setGenerateSession(FinalGenerateSession generateSession) {
+    public FinalSessionProperties setGenerateSession(FinalGenerateSession generateSession) {
         this.generateSession = generateSession;
+        return this;
     }
 }

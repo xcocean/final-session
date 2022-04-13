@@ -4,6 +4,8 @@ import top.lingkang.sessioncore.base.FinalRepository;
 import top.lingkang.sessioncore.config.FinalSessionProperties;
 import top.lingkang.sessioncore.wrapper.FinalSession;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,9 +16,10 @@ import java.util.concurrent.ConcurrentMap;
  * @author lingkang
  * Created by 2022/1/26
  */
-public class FinalMemoryRepository implements FinalRepository {
+public class FinalMemoryRepository implements FinalRepository, Serializable {
     private ConcurrentMap<String, FinalSession> map = new ConcurrentHashMap<>();
     private FinalSessionProperties properties;
+
     public FinalMemoryRepository() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -46,8 +49,13 @@ public class FinalMemoryRepository implements FinalRepository {
     }
 
     @Override
+    public void deleteSession(String id, HttpServletRequest request) {
+        map.remove(id);
+    }
+
+    @Override
     public void setFinalSessionProperties(FinalSessionProperties properties) {
-        this.properties=properties;
+        this.properties = properties;
     }
 
     @Override

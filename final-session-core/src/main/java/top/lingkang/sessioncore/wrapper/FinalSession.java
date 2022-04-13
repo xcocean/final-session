@@ -80,20 +80,6 @@ public class FinalSession implements HttpSession, Serializable {
     public void setAttribute(String name, Object value) {
         Assert.notNull(name, "Attribute name must not be null");
         attributes.put(name, value);
-        /*if (value != null) {
-            Object oldValue = this.attributes.put(name, value);
-            if (value != oldValue) {
-                if (oldValue instanceof HttpSessionBindingListener) {
-                    ((HttpSessionBindingListener) oldValue).valueUnbound(new HttpSessionBindingEvent(this, name, oldValue));
-                }
-
-                if (value instanceof HttpSessionBindingListener) {
-                    ((HttpSessionBindingListener) value).valueBound(new HttpSessionBindingEvent(this, name, value));
-                }
-            }
-        } else {
-            this.removeAttribute(name);
-        }*/
         existsUpdate = true;
     }
 

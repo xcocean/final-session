@@ -44,7 +44,7 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
         // 更多配置 ...
 
         // 默认会话存储于内存中，下面将会话存储于mysql中，需要引入JdbcTemplate依赖
-        properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
+        //properties.setRepository(new FinalDataBaseRepository(jdbcTemplate));
         //properties.setRepository(new FinalRedisRepository(redisTemplate));
     }
 }
