@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <url>https://gitee.com/lingkang_top/final-session</url>
-    <name>final-session-core</name>
+    <name>final-session</name>
     <description>final-session 一个轻量级分布式session框架</description>
     <organization>
         <name>lingkang</name>
@@ -22,6 +22,10 @@
             <email>ling-kang@qq.com</email>
             <organization>lingkang</organization>
             <organizationUrl>http://lingkang.top</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
         </developer>
     </developers>
     <licenses>
@@ -75,28 +79,6 @@
         </dependency>
     </dependencies>
 
-    <!--<distributionManagement>
-        <repository>
-            <id>local-repo-release</id>
-            <name>GitHub Release</name>
-            <url>file://${project.basedir}/../maven-repo</url>
-        </repository>
-    </distributionManagement>-->
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>maven-public</id> <!-- 此处id与setting.xml中的服务id保持一致 -->
-            <name>oss Snapshots Repository</name>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>maven-public</id> <!-- 此处id与setting.xml中的服务id保持一致 -->
-            <name>oss Staging Repository</name>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
-
     <build>
         <plugins>
             <plugin>
@@ -113,24 +95,6 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id> &lt;!&ndash; this is used for inheritance merges &ndash;&gt;
-                        <phase>package</phase> &lt;!&ndash; bind to the packaging phase &ndash;&gt;
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
             <!-- 生成javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -149,21 +113,6 @@
                     <additionalJOption>-Xdoclint:none</additionalJOption>
                     <failOnError>false</failOnError>
                 </configuration>
-            </plugin>
-
-            <!-- gpg认证 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

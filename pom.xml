@@ -28,7 +28,6 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-
     <licenses>
         <license>
             <name>MIT License</name>
@@ -36,7 +35,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
     <scm>
         <url>https://gitee.com/lingkang_top/final-session</url>
         <connection>https://gitee.com/lingkang_top/final-session.git</connection>
