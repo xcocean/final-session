@@ -83,6 +83,34 @@ public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
     }
 ```
 
+### 自定义会话ID的获取方式（适用前后端分离）
+当我们使用 `单体应用+前后端分离` 时，为识别当前会话是否登录，可自定义ID获取方式。默认的ID获取方式是通过cookie: `FinalSessionIdCookie`
+<br>
+我们可以实现 `FinalSessionId` 接口已达到能同时从请求头、请求参数、cookie中获取sessionID。
+```java
+@Order(Integer.MIN_VALUE - 1995)
+@Component
+public class MyFinalSessionConfig extends FinalSessionConfigurerAdapter {
+    @Override
+    protected void configurer(FinalSessionProperties properties) {
+        // 自定义ID的获取、设置方式
+        properties.setSessionId(new FinalSessionId() {
+            @Override
+            public String getSessionId(HttpServletRequest request, FinalSessionProperties properties) {
+                // 获取会话id的方式，可以通过 请求头、请求参数、cookie中获取
+                return request.getHeader("token");// 这只是一个demo
+            }
+
+            @Override
+            public void setSessionId(HttpServletRequest request, HttpServletResponse response, FinalSessionProperties properties, String sessionId) {
+                // 前后端分离，不设置会话ID到session
+            }
+        });
+    }
+}
+```
+
+
 ### 会话的存储
 通过存储于db、nosql中，实现分布式会话存储。
 #### 存储于redis中
