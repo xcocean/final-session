@@ -49,7 +49,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.1.12.RELEASE</spring-boot.version>
+        <spring-boot.version>2.6.8</spring-boot.version>
     </properties>
 
     <dependencyManagement>
